@@ -107,7 +107,7 @@ Stubby4j >= v.5.0.1
  
 Como utilizar o Stubby4j:
 
-Descompacte o arquivo mobile_assignment.zip
+Descompacte o arquivo mobile_assignment.zip (o arquivo se encontra na branch master desse repositório)
 
 Baixe o jar do stubby4j e coloque-o na pasta mobile_tech_assignment.
 
