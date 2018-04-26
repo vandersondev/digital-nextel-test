@@ -11,6 +11,7 @@
     <div class="container">
         <div class="row">
             <div class="col">
+                {% if vacation_dates %}
                 <h1>Resultado</h1>
                 <p>Para cidade de {{ city }} temos os dias:</p>
                 <ul>
@@ -18,6 +19,10 @@
                         <li>De {{ date['dayinit'] }} de {{ date['monthinit'] }} a {{ date['dayend'] }} de {{ date['monthend'] }}</li>
                     {% endfor %}
                 </ul>
+                {% else %}
+                <h1>Ops...</h1>
+                <p>Nenhuma data encontrada para {{ city }}.</p>
+                {% endif %}
                 <a href="/">Voltar</a>
             </div>
         </div>
