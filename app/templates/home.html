@@ -29,7 +29,7 @@
                         {% for weather in weather_list %}
                             <div class="col-4">
                                 <div class="form-group form-check">
-                                    <input type="checkbox" class="form-check-input" id="clima_{{loop.index}}" name="clima[]" value="{{ weather }}">
+                                    <input type="checkbox" class="form-check-input" id="clima_{{loop.index}}" name="clima" value="{{ weather }}">
                                     <label class="form-check-label" for="clima_{{loop.index}}">{{ weather }}</label>
                                 </div>
                             </div>

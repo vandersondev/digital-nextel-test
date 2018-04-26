@@ -14,9 +14,9 @@
                 <h1>Resultado</h1>
                 <p>Para cidade de {{ city }} temos os dias:</p>
                 <ul>
-                    <li>De 20 de Junho a 10 de Julho</li>
-                    <li>De 09 de Maio a 26 de Maio</li>
-                    <li>De 02 de Abril a 16 de Abril</li>
+                    {% for date in vacation_dates %}
+                        <li>De {{ date['dayinit'] }} de {{ date['monthinit'] }} a {{ date['dayend'] }} de {{ date['monthend'] }}</li>
+                    {% endfor %}
                 </ul>
                 <a href="/">Voltar</a>
             </div>

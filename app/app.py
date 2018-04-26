@@ -69,12 +69,35 @@ def home():
 
 @app.route("/result/", methods=['GET'])
 def result():
-    city = get_city_by_id(request.args.get('cidade'))
+    city_id = request.args.get('cidade')
     dias = request.args.get('qtd_dias')
     list_clima = request.args.getlist('clima')
-    #vacation_list = get_vacations_days(city, dias, list_clima)
-    vacation_list = get_vacations_days(455825, 15, ['clear', 'hot', 'partly cloudy', 'fair'])
-    print(vacation_list)
-    dt = datetime.strptime(vacation_list[0][0], '%Y-%m-%d')
-    print(dt.day)
-    return render_template('result.html', city=city)
+    vacation_list = get_vacations_days(city_id, int(dias), list_clima)
+    # vacation_list = get_vacations_days(455821, 15, ['clear', 'cold', 'partly cloudy'])
+    vacation_dates = []
+    mounth = {
+        '01':'Janeiro',
+        '02':'Fevereiro',
+        '03':'Março',
+        '04':'Abril',
+        '05':'Maio',
+        '06':'Junho',
+        '07':'Julho',
+        '08':'Agosto',
+        '09':'Setembro',
+        '10':'Outubro',
+        '11':'Novembro',
+        '12':'Dezembro'
+    }
+    for dates in vacation_list:
+        dateinit = dates[0].split('-')
+        dateend = dates[1].split('-')
+        vacation_dates.append({
+            'dayinit' : dateinit[2],
+            'monthinit' : mounth[dateinit[1]],
+            'dayend' : dateend[2],
+            'monthend' : mounth[dateend[1]],
+        })
+    vacation_dates.reverse()
+    city = get_city_by_id(request.args.get('cidade'))
+    return render_template('result.html', city=city, vacation_dates=vacation_dates)
