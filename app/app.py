@@ -3,6 +3,7 @@ import requests
 from flask import Flask, render_template, abort, request, redirect, url_for
 from app.getdata import get_cities, get_city_by_id, get_weather, get_vacations_days
 
+
 app = Flask('app')
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
