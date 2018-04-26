@@ -2,9 +2,10 @@ import json
 import requests
 
 from datetime import datetime
-from flask import Flask, render_template, abort, request
+from flask import Flask, render_template, abort, request, redirect, url_for
 
 app = Flask('app')
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
 def get_cities():
     r_cities = requests.get('http://localhost:8882/cities/')
@@ -13,7 +14,6 @@ def get_cities():
         r_cities_data = json.loads(r_cities.text)
         for i in r_cities_data:
             cities.append({'name': i['district'], 'id': i['woeid']})
-        print(cities)
         return cities
     else:
         abort(404)
@@ -35,7 +35,6 @@ def get_weather():
         r_weather_data = json.loads(r_weather.text)
         for i in r_weather_data:
             weather.append(i['name'])
-        print(weather)
         return weather
     else:
         abort(404)
@@ -60,44 +59,46 @@ def get_vacations_days(city, days, weathers):
         abort(404)
 
 
-@app.route("/")
+@app.route("/", methods=['GET'])
 def home():
     cities = get_cities()
     weather_list = get_weather()
     return render_template('home.html', cities=cities, weather_list=weather_list)
 
 
-@app.route("/result/", methods=['GET'])
+@app.route("/result/", methods=['GET', 'POST'])
 def result():
-    city_id = request.args.get('cidade')
-    dias = request.args.get('qtd_dias')
-    list_clima = request.args.getlist('clima')
-    vacation_list = get_vacations_days(city_id, int(dias), list_clima)
-    # vacation_list = get_vacations_days(455821, 15, ['clear', 'cold', 'partly cloudy'])
-    vacation_dates = []
-    mounth = {
-        '01':'Janeiro',
-        '02':'Fevereiro',
-        '03':'Março',
-        '04':'Abril',
-        '05':'Maio',
-        '06':'Junho',
-        '07':'Julho',
-        '08':'Agosto',
-        '09':'Setembro',
-        '10':'Outubro',
-        '11':'Novembro',
-        '12':'Dezembro'
-    }
-    for dates in vacation_list:
-        dateinit = dates[0].split('-')
-        dateend = dates[1].split('-')
-        vacation_dates.append({
-            'dayinit' : dateinit[2],
-            'monthinit' : mounth[dateinit[1]],
-            'dayend' : dateend[2],
-            'monthend' : mounth[dateend[1]],
-        })
-    vacation_dates.reverse()
-    city = get_city_by_id(request.args.get('cidade'))
-    return render_template('result.html', city=city, vacation_dates=vacation_dates)
+    if request.method == "POST":
+        city_id = request.form.get('city')
+        numberdays = request.form.get('numberdays')
+        weathers = request.form.getlist('weather')
+        vacation_list = get_vacations_days(city_id, int(numberdays), weathers)
+        vacation_dates = []
+        mounth = {
+            '01':'Janeiro',
+            '02':'Fevereiro',
+            '03':'Março',
+            '04':'Abril',
+            '05':'Maio',
+            '06':'Junho',
+            '07':'Julho',
+            '08':'Agosto',
+            '09':'Setembro',
+            '10':'Outubro',
+            '11':'Novembro',
+            '12':'Dezembro'
+        }
+        for dates in vacation_list:
+            dateinit = dates[0].split('-')
+            dateend = dates[1].split('-')
+            vacation_dates.append({
+                'dayinit' : dateinit[2],
+                'monthinit' : mounth[dateinit[1]],
+                'dayend' : dateend[2],
+                'monthend' : mounth[dateend[1]],
+            })
+        vacation_dates.reverse()
+        city = get_city_by_id(request.args.get('city'))
+        return render_template('result.html', city=city, vacation_dates=vacation_dates)
+    else:
+        return redirect(url_for('home'))

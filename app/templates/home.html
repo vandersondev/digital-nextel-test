@@ -11,26 +11,26 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <form action="/result/">
+                <form action="/result/" method="POST" class="vacation-form">
                     <div class="form-group">
-                        <label for="qtdDias">Quantidade de dias:</label>
-                        <input type="text" class="form-control" id="qtdDias" name="qtd_dias">
+                        <label for="numberdays">Quantidade de dias:</label>
+                        <input type="number" class="form-control" id="numberdays" name="numberdays" required>
                     </div>
                     <div class="form-group">
-                        <label for="cidade">Example select</label>
-                        <select class="form-control" id="cidade" name="cidade">
+                        <label for="city">Example select</label>
+                        <select class="form-control" id="city" name="city">
                             {% for city in cities %}
                                 <option value="{{ city['id'] }}">{{ city['name'] }}</option>
                             {% endfor %}
                         </select>
                     </div>
 
-                    <div class="form-row">
+                    <div class="form-row weather-group">
                         {% for weather in weather_list %}
                             <div class="col-4">
                                 <div class="form-group form-check">
-                                    <input type="checkbox" class="form-check-input" id="clima_{{loop.index}}" name="clima" value="{{ weather }}">
-                                    <label class="form-check-label" for="clima_{{loop.index}}">{{ weather }}</label>
+                                    <input type="checkbox" class="form-check-input" id="weather_{{loop.index}}" name="weather" value="{{ weather }}">
+                                    <label class="form-check-label" for="weather_{{loop.index}}">{{ weather }}</label>
                                 </div>
                             </div>
                         {% endfor %}
@@ -43,6 +43,6 @@
     <script src="/static/js/vendors/jquery-3.3.1.min.js"></script>
     <script src="/static/js/vendors/popper.js"></script>
     <script src="/static/js/vendors/bootstrap.min.js"></script>
-    <script></script>
+    <script src="/static/js/scripts.js?v=1"></script>
 </body>
 </html>
