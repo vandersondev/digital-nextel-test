@@ -11,6 +11,16 @@ app = Flask('app')
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
+
+@app.errorhandler(503)
+def service_unavailable(e):
+    return render_template('503.html'), 503
+
+
 @app.route("/", methods=['GET'])
 def home():
     cities = get_cities()

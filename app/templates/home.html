@@ -1,23 +1,34 @@
 {% extends "base.html" %}
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="col">
+<div class="container">
+        <div class="main-row row no-gutters">
+            <div class="col content">
+                <header>
+                    <h1>Escolha seu plano de férias</h1>
+                </header>
                 <form action="/result/" method="POST" class="vacation-form">
-                    <div class="form-group">
-                        <label for="numberdays">Quantidade de dias:</label>
-                        <input type="number" class="form-control" id="numberdays" name="numberdays" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="city">Example select</label>
-                        <select class="form-control" id="city" name="city">
-                            {% for city in cities %}
-                                <option value="{{ city['id'] }}">{{ city['name'] }}</option>
-                            {% endfor %}
-                        </select>
+                    <div class="form-row">
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="numberdays">Quantidade de dias:</label>
+                                <input type="number" class="form-control" id="numberdays" name="numberdays" required>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="form-group">
+                                <label for="city">Cidade:</label>
+                                <select class="form-control" id="city" name="city">
+                                    {% for city in cities %}
+                                        <option value="{{ city['id'] }}">{{ city['name'] }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
                     </div>
 
+
                     <div class="form-row weather-group">
+                        <h2 class="col-12">Selecione os climas desejados:</h2>
                         {% for weather in weather_list %}
                             <div class="col-4">
                                 <div class="form-group form-check">
@@ -27,7 +38,9 @@
                             </div>
                         {% endfor %}
                     </div>
-                    <button type="submit" class="btn btn-primary">Enviar</button>
+                    <div class="form-footer">
+                        <button type="submit" class="btn btn-info btn-lg btn-block">Enviar</button>
+                    </div>
                 </form>
             </div>
         </div>

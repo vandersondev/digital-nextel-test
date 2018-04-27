@@ -1,21 +1,30 @@
 {% extends "base.html" %}
 {% block content %}
     <div class="container">
-        <div class="row">
-            <div class="col">
+        <div class="main-row row no-gutters align-items-center">
+            <div class="col content">
                 {% if vacation_dates %}
-                <h1>Resultado</h1>
-                <p>Para cidade de {{ city }} temos os dias:</p>
-                <ul>
-                    {% for date in vacation_dates %}
-                        <li>De {{ date['dayinit'] }} de {{ date['monthinit'] }} a {{ date['dayend'] }} de {{ date['monthend'] }}</li>
-                    {% endfor %}
-                </ul>
+                <header>
+                    <h1>Resultado</h1>
+                    <p class="lead">Para cidade de strong{{ city }} temos os dias:</p>
+                </header>
+                <div class="form-row">
+                    <ul>
+                        {% for date in vacation_dates %}
+                            <li>De {{ date['dayinit'] }} de {{ date['monthinit'] }} a {{ date['dayend'] }} de {{ date['monthend'] }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                
                 {% else %}
-                <h1>Ops...</h1>
-                <p>Nenhuma data encontrada para {{ city }}.</p>
+                <header>
+                    <h1>Ops...</h1>
+                    <p class="lead">Nenhuma data encontrada para {{ city }}.</p>
+                </header>
                 {% endif %}
-                <a href="/">Voltar</a>
+                <div class="form-footer">
+                    <a href="/" class="btn btn-outline-info">Voltar</a>
+                </div>
             </div>
         </div>
     </div>

@@ -1,0 +1,39 @@
+html, body, .container, .main-row {
+    min-height: 100vh;
+}
+
+body {
+    background: #F5F8FA;
+    font-family: 'Lato', sans-serif;
+}
+
+.form-control {
+    background-color: #EDEFF2;
+    border-color: #EDEFF2;
+}
+
+label {
+    font-style: italic;
+}
+
+.content {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 1px 1px 12px rgba(0,0,0,0.1);
+}
+
+.content header,
+.content .form-row {
+    border-bottom: 2px solid #F5F7FA;
+}
+
+.content header,
+.content .form-row,
+.content .form-footer {
+    padding: 50px 30px;
+}
+
+.content header h1 {
+    font-family: 'Lato', sans-serif;
+    margin-bottom: 0;
+}
