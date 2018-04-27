@@ -29,7 +29,7 @@ $ pip install -r requirements.txt
 
 ### Execução
 
-Levante o stubby4j
+Iniciando o stubby4j
 
 ```shell
 $ java -jar <jar do stubby4j> -d tech_assignment_mobile_stubs.yml
