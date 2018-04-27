@@ -32,6 +32,7 @@ def test_result_post(client_app):
         'numberdays': 15,
         'weather': ['clear', 'partly cloudy', 'cold']}, follow_redirects=True)
     data = response.data.decode('utf-8')
+    item = '<li>De 20 de Junho a 10 de Julho</li>'
     assert response.status_code == 200
     assert response.content_type == 'text/html; charset=utf-8'
-    assert 
+    assert item in data

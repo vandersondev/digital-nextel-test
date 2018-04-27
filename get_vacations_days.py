@@ -15,6 +15,7 @@ def get_vacations_days(city, days, weathers):
                     vacation_days_list = []
                 else:
                     vacation_days_list = []
+        print(vacation_dates)
         return vacation_dates
 
-get_vacations_days(455821, 15, ['clear', 'partly cloudy', 'cold'])
+get_vacations_days(455825, 15, ['clear', 'hot', 'partly cloudy', 'fair'])
