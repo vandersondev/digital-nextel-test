@@ -11,7 +11,11 @@
                 <div class="form-row">
                     <ul>
                         {% for date in vacation_dates %}
+                            {% if date['dayinit'] != date['dayend'] %}
                             <li>De {{ date['dayinit'] }} de {{ date['monthinit'] }} a {{ date['dayend'] }} de {{ date['monthend'] }}</li>
+                            {% else %}
+                            <li>{{ date['dayinit'] }} de {{ date['monthinit'] }}</li>
+                            {% endif %}
                         {% endfor %}
                     </ul>
                 </div>
