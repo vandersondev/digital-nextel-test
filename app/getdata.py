@@ -5,6 +5,7 @@ from flask import abort
 
 BASEURL = 'http://localhost:8882'
 
+
 def get_cities():
     r_cities = requests.get(BASEURL + '/cities/')
     cities = []
@@ -48,7 +49,10 @@ def get_vacations_days(city, days, weathers):
                 vacation_days_list.append(date)
             else:
                 if len(vacation_days_list) >= days:
-                    vacation_dates.append((vacation_days_list[0]['date'], vacation_days_list[-1]['date']))
+                    vacation_dates.append(
+                        (vacation_days_list[0]['date'],
+                            vacation_days_list[-1]['date'])
+                    )
                     vacation_days_list = []
                 else:
                     vacation_days_list = []
