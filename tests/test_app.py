@@ -13,7 +13,10 @@ def test_home(client_app):
     response = client_app.get('/')
     data = response.data.decode('utf-8')
     opt_city = '<option value="455821">Porto Alegre</option>'
-    opt_weather = '<input type="checkbox" class="form-check-input" id="weather_5" name="weather" value="cold">'
+    opt_weather = (
+        '<input type="checkbox" class="form-check-input" '
+        'id="weather_5" name="weather" value="cold">'
+    )
     assert response.status_code == 200
     assert response.content_type == 'text/html; charset=utf-8'
     assert opt_city in data
